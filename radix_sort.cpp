@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <chrono>
 using namespace std;
+using namespace std::chrono;
 
 int getMax(int arr[], int n) {
     int mx = arr[0];
@@ -56,7 +58,12 @@ int main() {
     int n = 100000;
     int arr[n];
     file_input(arr, n, "100k.txt"); // range from 1 to 10000000 digits
+
+    auto start = high_resolution_clock::now();
     radixSort(arr, n);
-    print(arr, n);
+    auto stop = high_resolution_clock::now();
+
+    auto duration = duration_cast<microseconds>(stop - start);
+    cout << "Time taken by function: " << duration.count() << " microseconds" << endl;
     return 0;
 }
